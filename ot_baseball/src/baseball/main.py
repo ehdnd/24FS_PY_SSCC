@@ -13,13 +13,16 @@ def main():
 
         while 1:
             print("숫자를 입력해주세요: ", end="")
-            player = list(map(int, input()))
+            try:
+                player = list(map(int, input()))
+            except:
+                raise (ValueError)
 
             if len(player) != 3:
                 raise (ValueError)
 
             for i in range(3):
-                if player[i] < 1 or player[i] > 9:
+                if player[i] <= 0:
                     raise (ValueError)
 
             strike = 0
@@ -52,10 +55,10 @@ def main():
                     flag = 0
                 elif q == 2:
                     flag = 1
+
                 print("게임 종료")
                 break
 
 
 if __name__ == "__main__":
-    # 프로그램이 직접 실행될 때만 main() 함수를 호출
     main()
