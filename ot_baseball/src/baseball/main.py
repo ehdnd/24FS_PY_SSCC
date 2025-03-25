@@ -1,29 +1,19 @@
 def main():
     import random
 
-    flag = 0
+    flag = False
 
-    while 1:
-        if flag:
-            break
-
+    while not flag:
         computer = random.sample(range(1, 10), 3)
-
         print("숫자 야구 게임을 시작합니다.")
 
         while 1:
             print("숫자를 입력해주세요: ", end="")
-            try:
-                player = list(map(int, input()))
-            except:
-                raise (ValueError)
 
-            if len(player) != 3:
-                raise (ValueError)
+            player = list(map(int, input()))
 
-            for i in range(3):
-                if player[i] <= 0:
-                    raise (ValueError)
+            if len(player) != 3 or any(num <= 0 for num in player):
+                raise ValueError
 
             strike = 0
             ball = 0
@@ -50,13 +40,15 @@ def main():
             if player == computer:
                 print("3개의 숫자를 모두 맞히셨습니다! 게임 종료")
                 print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.")
-                q = int(input())
-                if q == 1:
-                    flag = 0
-                elif q == 2:
-                    flag = 1
 
-                print("게임 종료")
+                q = input()
+                if q == "1":
+                    flag = False
+                elif q == "2":
+                    flag = True
+                else:
+                    raise ValueError
+
                 break
 
 
